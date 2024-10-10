@@ -4,6 +4,10 @@ const useCountdown = (duration) => {
   const [time, setTime] = useState(duration);
 
   useEffect(() => {
+    setTime(duration);
+  }, [duration]);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       if (time > 0) {
         setTime(prev => prev - 1);
@@ -11,7 +15,7 @@ const useCountdown = (duration) => {
     }, 1000);
     
     return () => clearInterval(interval);
-  }, [duration]);
+  }, [duration, time]);
 
   return getReturnValues(time);
 };
